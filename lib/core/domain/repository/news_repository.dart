@@ -1,6 +1,6 @@
-import 'package:news_app/core/data/news_response_dto.dart';
+import 'package:news_app/core/domain/entity/news_entity.dart';
 
 abstract class NewsRepository {
-  Future<NewsResponseDto> fetchTopHeadlines();
-  Future<NewsResponseDto> fetchAllNews();
+  Future<List<NewsEntity>> fetchTopHeadlines();
+  Future<List<NewsEntity>> fetchAllNews();
 }
