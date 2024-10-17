@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/core/domain/entity/news_entity.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailScreen extends StatelessWidget {
   final NewsEntity news;
 
   const DetailScreen({super.key, required this.news});
+
+  Future<void> _readNewsInBrowser(Uri imageUrl) async {
+    if (await canLaunchUrl(imageUrl)) {
+      if (!await launchUrl(imageUrl, mode: LaunchMode.externalApplication)) {
+        throw Exception('Could not launch $imageUrl');
+      }
+    } else {
+      throw Exception('URL cannot be launched');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +94,10 @@ class DetailScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: FilledButton(
-                onPressed: () {},
+                onPressed: () {
+                  Uri parsedUrl = Uri.parse(news.url.toString());
+                  _readNewsInBrowser(parsedUrl);
+                },
                 style: FilledButton.styleFrom(
                     minimumSize: const Size.fromHeight(40)),
                 child: const Text('Read News'),

@@ -9,16 +9,12 @@ class NewsRepositoryImpl extends NewsRepository {
   NewsRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<List<NewsEntity>> fetchAllNews() async {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<NewsEntity>> fetchTopHeadlines() async {
+  Future<List<NewsEntity>> fetchAllNews(String newsCategory) async {
     try {
-      final List<NewsModel> topHeadlineModels =
-          await _remoteDataSource.fetchTopHeadlines();
-      return topHeadlineModels.map((model) => NewsEntity(
+      final List<NewsModel> everythingNews =
+          await _remoteDataSource.fetchEverythingNews(newsCategory);
+      return everythingNews
+      .map((model) => NewsEntity(
           source: model.source.toEntity(model.source),
           author: model.author,
           title: model.title,
@@ -26,7 +22,33 @@ class NewsRepositoryImpl extends NewsRepository {
           url: model.url,
           urlToImage: model.urlToImage,
           publishedAt: model.publishedAt,
-          content: model.content)).toList();
+          content: model.content))
+      .where((entity) => entity.urlToImage.toString() != 'null')
+      .take(20)
+      .toList();
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  @override
+  Future<List<NewsEntity>> fetchTopHeadlines() async {
+    try {
+      final List<NewsModel> topHeadlineModels =
+          await _remoteDataSource.fetchTopHeadlines();
+      return topHeadlineModels
+      .map((model) => NewsEntity(
+          source: model.source.toEntity(model.source),
+          author: model.author,
+          title: model.title,
+          description: model.description,
+          url: model.url,
+          urlToImage: model.urlToImage,
+          publishedAt: model.publishedAt,
+          content: model.content))
+      .where((entity) => entity.urlToImage.toString() != 'null')
+      .take(5)
+      .toList();
     } catch (e) {
       throw Exception(e.toString());
     }

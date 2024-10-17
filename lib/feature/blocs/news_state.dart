@@ -4,16 +4,30 @@ abstract class NewsState {}
 
 class NewsInitial extends NewsState {}
 
-class NewsLoading extends NewsState {}
+class HeadlineNewsLoading extends NewsState {}
 
-class NewsSuccess extends NewsState {
+class HeadlineNewsSuccess extends NewsState {
   final List<NewsEntity> newsArticles;
 
-  NewsSuccess(this.newsArticles);
+  HeadlineNewsSuccess(this.newsArticles);
 }
 
-class NewsError extends NewsState {
+class HeadlineNewsError extends NewsState {
   final String errorMessage;
 
-  NewsError(this.errorMessage);
+  HeadlineNewsError(this.errorMessage);
+}
+
+class EverythingNewsLoading extends NewsState {}
+
+class EverythingNewsSuccess extends NewsState {
+  final List<NewsEntity> newsArticles;
+
+  EverythingNewsSuccess(this.newsArticles);
+}
+
+class EverythingNewsError extends NewsState {
+  final String errorMessage;
+
+  EverythingNewsError(this.errorMessage);
 }
