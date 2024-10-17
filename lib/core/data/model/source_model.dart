@@ -2,7 +2,7 @@ import 'package:news_app/core/domain/entity/news_entity.dart';
 
 class SourceModel {
   dynamic id;
-  String name;
+  String? name;
 
   SourceModel({
     required this.id,

@@ -4,13 +4,13 @@ import 'source_model.dart';
 
 class NewsModel {
   SourceModel source;
-  String author;
-  String title;
-  String description;
-  String url;
-  String urlToImage;
-  DateTime publishedAt;
-  String content;
+  String? author;
+  String? title;
+  String? description;
+  String? url;
+  String? urlToImage;
+  DateTime? publishedAt;
+  String? content;
 
   NewsModel({
     required this.source,
@@ -52,7 +52,7 @@ class NewsModel {
         "description": description,
         "url": url,
         "urlToImage": urlToImage,
-        "publishedAt": publishedAt.toIso8601String(),
+        "publishedAt": publishedAt?.toIso8601String(),
         "content": content,
       };
 }

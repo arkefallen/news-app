@@ -1,12 +1,12 @@
 class NewsEntity {
   SourceEntity source;
-  String author;
-  String title;
-  String description;
-  String url;
-  String urlToImage;
-  DateTime publishedAt;
-  String content;
+  String? author;
+  String? title;
+  String? description;
+  String? url;
+  String? urlToImage;
+  DateTime? publishedAt;
+  String? content;
 
   NewsEntity({
     required this.source,
@@ -22,7 +22,7 @@ class NewsEntity {
 
 class SourceEntity {
   dynamic id;
-  String name;
+  String? name;
 
   SourceEntity({
     required this.id,

@@ -6,17 +6,17 @@ import 'package:news_app/feature/blocs/news_state.dart';
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   final FetchTopHeadlinesUsecase _fetchTopHeadlinesUsecase;
 
-  NewsBloc(this._fetchTopHeadlinesUsecase) : super(NewsInitial());
-
-  Stream<NewsState> getTopHeadlinesNews(NewsEvent event) async* {
-    if (event is FetchNews) {
-      yield NewsLoading();
-      try {
-        final newsArticles = await _fetchTopHeadlinesUsecase.call();
-        yield NewsSuccess(newsArticles);
-      } catch (e) {
-        yield NewsError('Failed to fetch top headlines');
+  NewsBloc(this._fetchTopHeadlinesUsecase) : super(NewsInitial()) {
+    on<FetchNews>((NewsEvent event, Emitter<NewsState> emit) async {
+      if (event is FetchNews) {
+        emit(NewsLoading());
+        try {
+          final newsArticles = await _fetchTopHeadlinesUsecase.call();
+          emit(NewsSuccess(newsArticles));
+        } catch (e) {
+          emit(NewsError(e.toString()));
+        }
       }
-    }
+    });
   }
 }
