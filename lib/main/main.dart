@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/resource/notificiation_notifier.dart';
 import 'package:news_app/core/resource/theme_notifier.dart';
 import 'package:provider/provider.dart';
-import 'feature/page/home_screen.dart';
+import '../feature/page/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
