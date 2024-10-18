@@ -1,5 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:news_app/core/data/model/news_model.dart';
+import 'package:news_app/core/resource/theme_notifier.dart';
+import 'package:news_app/feature/page/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart' as tz;
 
@@ -16,7 +19,8 @@ class NotificationService {
     playSound: true,
   );
 
-  static saveSettings(bool value, NewsModel? newsModel) async {
+  static saveSettings(bool value, NewsModel? newsModel, BuildContext? context,
+      ThemeNotifier? theme) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool(_enableAlarmKey, value);
 
@@ -40,7 +44,15 @@ class NotificationService {
       final InitializationSettings initializationSettings =
           InitializationSettings(android: androidInitializationSettings);
 
-      FlutterLocalNotificationsPlugin().initialize(initializationSettings);
+      FlutterLocalNotificationsPlugin().initialize(
+        initializationSettings,
+        onDidReceiveNotificationResponse: (details) {
+          Navigator.push(
+              context as BuildContext,
+              MaterialPageRoute(
+                  builder: (context) => MyHomePage(title: 'News App', theme: theme as ThemeNotifier)));
+        },
+      );
 
       final now = tz.TZDateTime.now(tz.local);
       tz.TZDateTime scheduledDate = tz.TZDateTime(

@@ -1,16 +1,19 @@
-# news_app
+# News App
 
-A new Flutter project.
+News App adalah aplikasi sederhana untuk membaca dan mengakses berita terkini yang berada di negara Amerika Serikat. Aplikasi ini terdapat konten berita dari berbagai kategori seperti Umum, Bisnis, Teknologi, Olahraga, dan Politik.
 
-## Getting Started
+## Fitur
+1. Melihat daftar berita
+2. Melihat berita secara detail
+3. Mengubah tema menjadi gelap (Dark Mode)
+4. Memberikan notifikasi berita terbaru secara acak setiap jam 10 pagi
 
-This project is a starting point for a Flutter application.
+## Cara Memakai Aplikasi Ini
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Fork projek ini
+2. Pada folder lib/core/ , buat file bernama 'constants.dart'
+3. Isi file tersebut dengan kode yang menyimpan API Key dari NewsAPI 
+```dart
+const String apiKey = "YOUR_API_KEY";
+```
+4. Sekarang bisa jalankan aplikasi melalui emulator

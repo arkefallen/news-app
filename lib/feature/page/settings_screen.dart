@@ -90,7 +90,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         _isNotificationEnabled = value;
                       });
                       if (value == true) {
-                        widget.notif.enableNotification(_newsModel);
+                        widget.notif.enableNotification(_newsModel, context, widget.theme);
                       } else {
                         widget.notif.disableNotification();
                       }
