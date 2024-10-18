@@ -17,3 +17,7 @@ News App adalah aplikasi sederhana untuk membaca dan mengakses berita terkini ya
 const String apiKey = "YOUR_API_KEY";
 ```
 4. Sekarang bisa jalankan aplikasi melalui emulator
+
+## Showcase
+
+[![Watch the video](https://drive.google.com/file/d/1mskCTSm8LKC8eVeJzwlrz5kw82rdgD7q/view?usp=sharing)]
