@@ -20,4 +20,4 @@ const String apiKey = "YOUR_API_KEY";
 
 ## Showcase
 
-[![Watch the video](https://drive.google.com/file/d/1mskCTSm8LKC8eVeJzwlrz5kw82rdgD7q/view?usp=sharing)]
+Lihat preview projeknya disini https://drive.google.com/file/d/1mskCTSm8LKC8eVeJzwlrz5kw82rdgD7q/view?usp=sharing
