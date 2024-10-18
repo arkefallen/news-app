@@ -2,6 +2,8 @@
 
 News App adalah aplikasi sederhana untuk membaca dan mengakses berita terkini yang berada di negara Amerika Serikat. Aplikasi ini terdapat konten berita dari berbagai kategori seperti Umum, Bisnis, Teknologi, Olahraga, dan Politik.
 
+News App dibangun menggunakan bahasa pemrograman Dart dengan framework Flutter untuk memberikan aksesibilitas aplikasi pada banyak platform seperti Android, iOS, Web, dan Desktop. Aplikasi ini dibuat menggunakan arsitektur Clean Architecture dengan state management BLoC pattern. News App juga terdapat unit test yang menguji fungsionalitas pada komponen Use Case di Domain Layer.
+
 ## Fitur
 1. Melihat daftar berita terkini
 2. Eksplor berita berdasarkan kategori
