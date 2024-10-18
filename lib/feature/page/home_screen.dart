@@ -5,15 +5,20 @@ import 'package:news_app/core/data/datasource/remote_news_datasource.dart';
 import 'package:news_app/core/data/repository/news_repository_impl.dart';
 import 'package:news_app/core/domain/usecases/fetch_all_news_usecase.dart';
 import 'package:news_app/core/domain/usecases/fetch_top_headlines_usecase.dart';
+import 'package:news_app/core/resource/notificiation_notifier.dart';
+import 'package:news_app/core/resource/theme_notifier.dart';
 import 'package:news_app/feature/blocs/news_bloc.dart';
 import 'package:news_app/feature/blocs/news_event.dart';
 import 'package:news_app/feature/blocs/news_state.dart';
 import 'package:news_app/feature/page/detail_screen.dart';
+import 'package:news_app/feature/page/settings_screen.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title, required this.theme});
 
   final String title;
+  final ThemeNotifier theme;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -32,24 +37,40 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          title: Center(
-            child: Text(widget.title,
+    return Consumer<NotificiationNotifier>(builder: (context, notif, _) {
+      return Scaffold(
+          appBar: AppBar(
+            actions: <Widget>[
+              PopupMenuButton(itemBuilder: (BuildContext context) {
+                return ['Settings']
+                    .map((menuItem) => PopupMenuItem(
+                          child: Text(menuItem),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SettingsScreen(theme: widget.theme, notif: notif,)));
+                          },
+                        ))
+                    .toList();
+              })
+            ],
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            title: Text(widget.title,
                 style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
-        ),
-        body: MultiBlocProvider(providers: [
-          BlocProvider(
-              create: (context) => HeadlineNewsBloc(FetchTopHeadlinesUsecase(
-                  NewsRepositoryImpl(NewsRemoteDataSource())))
-                ..add(FetchHeadlineNews())),
-          BlocProvider(
-              create: (context) => EverythingNewsBloc(FetchAllNewsUsecase(
-                  NewsRepositoryImpl(NewsRemoteDataSource())))
-                ..add(FetchEverythingNews(_newsCategoryValue)))
-        ], child: homePageBuilder(context)));
+          body: MultiBlocProvider(providers: [
+            BlocProvider(
+                create: (context) => HeadlineNewsBloc(FetchTopHeadlinesUsecase(
+                    NewsRepositoryImpl(NewsRemoteDataSource())))
+                  ..add(FetchHeadlineNews())),
+            BlocProvider(
+                create: (context) => EverythingNewsBloc(FetchAllNewsUsecase(
+                    NewsRepositoryImpl(NewsRemoteDataSource())))
+                  ..add(FetchEverythingNews(_newsCategoryValue)))
+          ], child: homePageBuilder(context)));
+    });
   }
 
   SingleChildScrollView homePageBuilder(BuildContext context) {
